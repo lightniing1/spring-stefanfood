@@ -1,4 +1,7 @@
 package com.stefanini.stefanfood.repository;
 
-public class ClienteRepository {
+import com.stefanini.stefanfood.model.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 }
