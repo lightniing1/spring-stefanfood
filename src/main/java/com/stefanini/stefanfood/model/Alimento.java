@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +25,18 @@ public class Alimento {
     private String descricao;
     @ManyToMany(mappedBy = "alimentos")
     private Set<Pedido> pedidos = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    @NotNull(message = "alimento deve pertencer a uma empresa")
+    private Empresa empresa;
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
     public Long getId() {
         return id;

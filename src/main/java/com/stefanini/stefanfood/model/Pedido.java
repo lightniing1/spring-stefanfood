@@ -18,7 +18,7 @@ public class Pedido {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     @ManyToMany
-    @JoinTable(name = "pedidos_aliementos",
+    @JoinTable(name = "pedidos_alimentos",
         joinColumns = {@JoinColumn(name = "pedido_id")},
         inverseJoinColumns = {@JoinColumn(name = "alimento_id")})
     private Set<Alimento> alimentos = new HashSet<>();
