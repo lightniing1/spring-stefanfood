@@ -1,8 +1,8 @@
 package com.stefanini.stefanfood.service;
 
+import com.stefanini.stefanfood.dto.PedidoDto;
 import com.stefanini.stefanfood.model.*;
-import com.stefanini.stefanfood.repository.EnderecoClienteRepository;
-import com.stefanini.stefanfood.repository.PedidoRepository;
+import com.stefanini.stefanfood.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +17,45 @@ public class PedidoService {
     PedidoRepository pedidoRepository;
     @Autowired
     EnderecoClienteRepository enderecoClienteRepository;
+    @Autowired
+    EmpresaRepository empresaRepository;
+    @Autowired
+    ClienteRepository clienteRepository;
+    @Autowired
+    AlimentoRepository alimentoRepository;
 
-    private Pedido prePedido (Cliente cliente, Empresa empresa) {
+
+    private EnderecoCliente pegaEnderecoCliente (Cliente cliente) {
         EnderecoCliente endereco = enderecoClienteRepository.findByCliente(cliente);
         if (endereco != null) {
-            Pedido pedido = new Pedido();
-            pedido.setCliente(cliente);
-            pedido.setEmpresa(empresa);
-            pedido.setEnderecoEntrega(endereco);
-            return pedido;
+            return endereco;
         }
         return null;
     }
 
-    public ResponseEntity<Pedido> criaPedido (Cliente cliente, Empresa empresa, List<Alimento> alimentos) {
-        Pedido pedido = prePedido(cliente, empresa);
+    public ResponseEntity<List<Pedido>> listaPedidos() {
+        return new ResponseEntity<List<Pedido>>(pedidoRepository.findAll(), HttpStatus.OK);
+    }
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<Pedido> montaPedido (PedidoDto novoPedido) {
+
+        Cliente cliente = clienteRepository.findById(novoPedido.getCliente()).get();
+        System.out.println(cliente);
+        Empresa empresa = empresaRepository.findById(novoPedido.getEmpresa()).get();
+        System.out.println(empresa);
+        EnderecoCliente enderecoCliente = enderecoClienteRepository.findById(novoPedido.getEnderecoCliente()).get();
+        System.out.println(enderecoCliente);
+
+        if (cliente != null && empresa != null && enderecoCliente != null) {
+            Pedido pedido = new Pedido(cliente, empresa, enderecoCliente);
+            for (Long idAlimento : novoPedido.getAlimentos()) {
+                Alimento alimento = alimentoRepository.findById(idAlimento).get();
+                pedido.adicionaAlimento(alimento);
+            }
+            pedidoRepository.save(pedido);
+            return new ResponseEntity<>(pedido, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

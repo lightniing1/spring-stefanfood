@@ -11,7 +11,6 @@ public class EnderecoCliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
@@ -21,7 +20,6 @@ public class EnderecoCliente {
     private String numeroEndereco;
     @NotBlank
     private String cep;
-    @NotBlank
     private String complemento;
 
     public Cliente getCliente() {
