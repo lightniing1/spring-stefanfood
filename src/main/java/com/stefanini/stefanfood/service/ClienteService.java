@@ -31,7 +31,7 @@ public class ClienteService {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    private ClienteDto converteEntityParaDto(Cliente cliente) {
+    public ClienteDto converteEntityParaDto(Cliente cliente) {
         ClienteDto clienteDto = new ClienteDto();
         clienteDto.setNomeSocial(cliente.getNomeSocial());
         clienteDto.setEmail(cliente.getEmail());

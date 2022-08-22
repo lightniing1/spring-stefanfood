@@ -1,5 +1,6 @@
 package com.stefanini.stefanfood.controller;
 
+import com.stefanini.stefanfood.dto.PedidoDto;
 import com.stefanini.stefanfood.mapper.PedidoMapper;
 import com.stefanini.stefanfood.model.Pedido;
 import com.stefanini.stefanfood.service.PedidoService;
@@ -17,7 +18,7 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @PostMapping
-    public ResponseEntity<Pedido> novoPedido (@RequestBody PedidoMapper novoPedido) {
+    public ResponseEntity<PedidoDto> novoPedido (@RequestBody PedidoMapper novoPedido) {
         return pedidoService.montaPedido(novoPedido);
     }
 

@@ -1,49 +1,48 @@
 package com.stefanini.stefanfood.dto;
 
 import antlr.LexerSharedInputState;
+import com.stefanini.stefanfood.model.Alimento;
+import com.stefanini.stefanfood.model.EnderecoCliente;
 
 import java.util.List;
+import java.util.Set;
 
 public class PedidoDto {
 
-    private Long cliente;
-    private Long empresa;
-    private Long enderecoCliente;
-    private List<Long> alimentos;
+    private String cliente;
+    private String empresa;
+    private EnderecoClienteDto enderecoCliente;
+    private Set<AlimentoDto> alimentos;
 
     public PedidoDto() {
 
     }
 
-    public Long getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Long cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public Long getEmpresa() {
+    public String getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(Long empresa) {
-        this.empresa = empresa;
-    }
-
-    public Long getEnderecoCliente() {
+    public EnderecoClienteDto getEnderecoCliente() {
         return enderecoCliente;
     }
 
-    public void setEnderecoCliente(Long enderecoCliente) {
+    public void setEnderecoCliente(EnderecoClienteDto enderecoCliente) {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public List<Long> getAlimentos() {
+    public Set<AlimentoDto> getAlimentos() {
         return alimentos;
     }
 
-    public void setAlimentos(List<Long> alimentos) {
+    public void setAlimentos(Set<AlimentoDto> alimentos) {
         this.alimentos = alimentos;
     }
 }

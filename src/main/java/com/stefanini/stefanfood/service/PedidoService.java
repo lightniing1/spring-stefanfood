@@ -1,5 +1,6 @@
 package com.stefanini.stefanfood.service;
 
+import com.stefanini.stefanfood.dto.*;
 import com.stefanini.stefanfood.mapper.PedidoMapper;
 import com.stefanini.stefanfood.model.*;
 import com.stefanini.stefanfood.repository.*;
@@ -23,6 +24,14 @@ public class PedidoService {
     ClienteRepository clienteRepository;
     @Autowired
     AlimentoRepository alimentoRepository;
+    @Autowired
+    ClienteService clienteService;
+    @Autowired
+    EmpresaService empresaService;
+    @Autowired
+    AlimentoService alimentoService;
+    @Autowired
+    EnderecoClienteService enderecoClienteService;
 
 
     private EnderecoCliente pegaEnderecoCliente (Cliente cliente) {
@@ -37,7 +46,7 @@ public class PedidoService {
         return new ResponseEntity<List<Pedido>>(pedidoRepository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity<Pedido> montaPedido (PedidoMapper novoPedido) {
+    public ResponseEntity<PedidoDto> montaPedido (PedidoMapper novoPedido) {
 
         Cliente cliente = clienteRepository.findById(novoPedido.getCliente()).get();
         Empresa empresa = empresaRepository.findById(novoPedido.getEmpresa()).get();
@@ -50,9 +59,23 @@ public class PedidoService {
                 pedido.adicionaAlimento(alimento);
             }
             pedidoRepository.save(pedido);
-            return new ResponseEntity<>(pedido, HttpStatus.CREATED);
+            return new ResponseEntity<>(converteEntityParaDto(pedido), HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    public PedidoDto converteEntityParaDto(Pedido pedido) {
+        PedidoDto pedidoDto = new PedidoDto();
+        //Chamar outros DTOs assim não parece ser uma boa prática...
+        EmpresaDto empresaDto = new EmpresaDto();
+        AlimentoDto alimentoDto = new AlimentoDto();
+        EnderecoClienteDto enderecoClienteDto = new EnderecoClienteDto();
+
+        pedidoDto.setCliente(pedido.getCliente().getNomeSocial());
+        pedidoDto.setAlimentos(pedido.getAlimentos());
+        pedidoDto.setEmpresa(pedido.getEmpresa().getNomeFantasia());
+        pedidoDto.setEnderecoCliente(pedido.getEnderecoEntrega());
+        return pedidoDto;
     }
 
 }

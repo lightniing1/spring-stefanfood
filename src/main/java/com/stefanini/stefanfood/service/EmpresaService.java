@@ -28,11 +28,11 @@ public class EmpresaService {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    private EmpresaDto converteEntityParaDto(Empresa empresa) {
+    public EmpresaDto converteEntityParaDto(Empresa empresa) {
         EmpresaDto empresaDto = new EmpresaDto();
-        empresaDto.setId(empresa.getId());
+        //empresaDto.setId(empresa.getId());
         empresaDto.setCnpj(empresa.getCnpj());
-        empresaDto.setNome(empresa.getNome());
+        empresaDto.setNome(empresa.getNomeFantasia());
 
         return empresaDto;
     }
