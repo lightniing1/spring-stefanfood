@@ -1,5 +1,7 @@
 package com.stefanini.stefanfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +26,7 @@ public class Alimento {
     @Column(length = 150)
     private String descricao;
     @ManyToMany(mappedBy = "alimentos")
+    @JsonIgnore
     private Set<Pedido> pedidos = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "empresa_id")

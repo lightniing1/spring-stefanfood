@@ -26,6 +26,16 @@ public class Pedido {
     @JoinColumn(name = "endereco_entrega_id")
     private EnderecoCliente enderecoEntrega;
 
+    public Pedido() {
+
+    }
+
+    public Pedido(Cliente cliente, Empresa empresa, EnderecoCliente enderecoEntrega) {
+        this.cliente = cliente;
+        this.empresa = empresa;
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
     public Long getId() {
         return id;
     }
