@@ -65,4 +65,9 @@ public class Pedido {
     public void setEnderecoEntrega(EnderecoCliente enderecoEntrega) {
         this.enderecoEntrega = enderecoEntrega;
     }
+
+    public void adicionaAlimento (Alimento alimento) {
+        this.alimentos.add(alimento);
+        alimento.getPedidos().add(this);
+    }
 }
