@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface AlimentoRepository extends JpaRepository<Alimento, Long> {
     List<Alimento> findAllByEmpresa(Empresa empresa);
+    Alimento findAlimentoByEmpresaAndId(Empresa empresa, Long AlimentoId);
 }

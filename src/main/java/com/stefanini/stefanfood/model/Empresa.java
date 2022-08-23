@@ -27,6 +27,15 @@ public class Empresa {
     private String cep;
     @NotBlank(message = "o campo 'numero' nao pode estar em branco")
     private String numeroEndereco;
+    private boolean excluido;
+
+    public boolean isExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
+    }
 
     public String getNumeroEndereco() {
         return numeroEndereco;

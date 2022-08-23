@@ -32,6 +32,15 @@ public class Alimento {
     @JoinColumn(name = "empresa_id")
     @NotNull(message = "alimento deve pertencer a uma empresa")
     private Empresa empresa;
+    private boolean excluido;
+
+    public boolean isExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
+    }
 
     public Empresa getEmpresa() {
         return empresa;

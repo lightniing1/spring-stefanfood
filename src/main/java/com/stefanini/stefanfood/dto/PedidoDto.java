@@ -30,6 +30,10 @@ public class PedidoDto {
         return empresa;
     }
 
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
     public EnderecoClienteDto getEnderecoCliente() {
         return enderecoCliente;
     }

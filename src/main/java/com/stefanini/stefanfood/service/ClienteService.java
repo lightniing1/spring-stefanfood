@@ -27,8 +27,38 @@ public class ClienteService {
     public ResponseEntity<List<ClienteDto>> listarClientes() {
         return new ResponseEntity<List<ClienteDto>>(clienteRepository.findAll()
                 .stream()
+                .filter(cliente -> !cliente.isExcluido())
                 .map(this::converteEntityParaDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Cliente> editaCliente(Cliente novoCliente, Long clienteId) {
+        Cliente cliente = clienteRepository.findById(clienteId).get();
+        if (cliente != null) {
+            cliente.setNome(novoCliente.getNome());
+            cliente.setNomeSocial(novoCliente.getNomeSocial());
+            cliente.setEmail(novoCliente.getEmail());
+            clienteRepository.save(cliente);
+            return new ResponseEntity<Cliente>(cliente, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    /*
+    public ResponseEntity<Cliente> excluirCliente(Long clienteId) {
+        clienteRepository.deleteById(clienteId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    */
+
+    public ResponseEntity<Cliente> excluirCliente(Long clienteId) {
+        Cliente cliente = clienteRepository.findById(clienteId).get();
+        if (cliente != null) {
+            cliente.setExcluido(true);
+            clienteRepository.save(cliente);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     public ClienteDto converteEntityParaDto(Cliente cliente) {

@@ -31,6 +31,18 @@ public class ClienteController {
         return clienteService.cadastraNovoCliente(cliente);
     }
 
+    @PutMapping("/{clienteId}")
+    public ResponseEntity<Cliente> editaDadosCliente(@RequestBody Cliente cliente,
+                                                     @PathVariable Long clienteId) {
+        return clienteService.editaCliente(cliente, clienteId);
+    }
+
+    @DeleteMapping("/{clienteId}")
+    public ResponseEntity<Cliente> excluirCliente(@PathVariable Long clienteId) {
+        return clienteService.excluirCliente(clienteId);
+    }
+
+
     @PostMapping
     @RequestMapping("/{clienteId}/endereco")
     public ResponseEntity<EnderecoCliente> cadastraEnderecoCliente(@PathVariable Long clienteId,

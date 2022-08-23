@@ -1,5 +1,7 @@
 package com.stefanini.stefanfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -20,6 +22,17 @@ public class Cliente {
     private String email;
     @NotBlank
     private String cpf;
+
+    @JsonIgnore
+    private boolean excluido;
+
+    public boolean isExcluido() {
+        return excluido;
+    }
+
+    public void setExcluido(boolean excluido) {
+        this.excluido = excluido;
+    }
 
     public String getNome() {
         return nome;

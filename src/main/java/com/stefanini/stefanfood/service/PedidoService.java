@@ -9,7 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -66,15 +70,33 @@ public class PedidoService {
 
     public PedidoDto converteEntityParaDto(Pedido pedido) {
         PedidoDto pedidoDto = new PedidoDto();
-        //Chamar outros DTOs assim não parece ser uma boa prática...
-        EmpresaDto empresaDto = new EmpresaDto();
-        AlimentoDto alimentoDto = new AlimentoDto();
+        //Chamar outros DTOs assim não parece ser uma boa prática... verificar depois
+
+        //AlimentoDto
+        List<Alimento> alimentoList = pedido.getAlimentos().stream().toList();
+        List<AlimentoDto> alimentoDtoList = new LinkedList<>();
+
+        for (Alimento alimento : alimentoList) {
+            AlimentoDto alimentoDto = new AlimentoDto();
+            alimentoDto.setNome(alimento.getNome());
+            alimentoDto.setDescricao(alimento.getDescricao());
+            alimentoDto.setPreco(alimento.getPreco());
+            alimentoDtoList.add(alimentoDto);
+        }
+
+        //EnderecoClienteDto
         EnderecoClienteDto enderecoClienteDto = new EnderecoClienteDto();
+        enderecoClienteDto.setEndereco(pedido.getEnderecoEntrega().getEndereco());
+        enderecoClienteDto.setNumero(pedido.getEnderecoEntrega().getNumeroEndereco());
+        enderecoClienteDto.setComplemento(pedido.getEnderecoEntrega().getComplemento());
+        enderecoClienteDto.setCep(pedido.getEnderecoEntrega().getCep());
+
 
         pedidoDto.setCliente(pedido.getCliente().getNomeSocial());
-        pedidoDto.setAlimentos(pedido.getAlimentos());
+        pedidoDto.setAlimentos(new HashSet<>(alimentoDtoList));
         pedidoDto.setEmpresa(pedido.getEmpresa().getNomeFantasia());
-        pedidoDto.setEnderecoCliente(pedido.getEnderecoEntrega());
+        pedidoDto.setEnderecoCliente(enderecoClienteDto);
+
         return pedidoDto;
     }
 
