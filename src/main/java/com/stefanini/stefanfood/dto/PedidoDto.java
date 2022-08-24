@@ -1,10 +1,5 @@
 package com.stefanini.stefanfood.dto;
 
-import antlr.LexerSharedInputState;
-import com.stefanini.stefanfood.model.Alimento;
-import com.stefanini.stefanfood.model.EnderecoCliente;
-
-import java.util.List;
 import java.util.Set;
 
 public class PedidoDto {
@@ -12,7 +7,7 @@ public class PedidoDto {
     private String cliente;
     private String empresa;
     private EnderecoClienteDto enderecoCliente;
-    private Set<AlimentoDto> alimentos;
+    private Set<ItemDto> alimentos;
 
     public PedidoDto() {
 
@@ -42,11 +37,11 @@ public class PedidoDto {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public Set<AlimentoDto> getAlimentos() {
+    public Set<ItemDto> getAlimentos() {
         return alimentos;
     }
 
-    public void setAlimentos(Set<AlimentoDto> alimentos) {
+    public void setAlimentos(Set<ItemDto> alimentos) {
         this.alimentos = alimentos;
     }
 }

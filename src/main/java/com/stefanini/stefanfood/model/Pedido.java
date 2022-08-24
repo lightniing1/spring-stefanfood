@@ -17,11 +17,8 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-    @ManyToMany
-    @JoinTable(name = "pedidos_alimentos",
-        joinColumns = {@JoinColumn(name = "pedido_id")},
-        inverseJoinColumns = {@JoinColumn(name = "alimento_id")})
-    private Set<Alimento> alimentos = new HashSet<>();
+    @OneToMany(mappedBy = "pedido")
+    private Set<PedidosItens> item = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "endereco_entrega_id")
     private EnderecoCliente enderecoEntrega;
@@ -60,14 +57,6 @@ public class Pedido {
         this.empresa = empresa;
     }
 
-    public Set<Alimento> getAlimentos() {
-        return alimentos;
-    }
-
-    public void setAlimentos(Set<Alimento> alimentos) {
-        this.alimentos = alimentos;
-    }
-
     public EnderecoCliente getEnderecoEntrega() {
         return enderecoEntrega;
     }
@@ -76,8 +65,18 @@ public class Pedido {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public void adicionaAlimento (Alimento alimento) {
-        this.alimentos.add(alimento);
-        alimento.getPedidos().add(this);
+    public Set<PedidosItens> getItem() {
+        return item;
     }
+
+    public void setItem(Set<PedidosItens> item) {
+        this.item = item;
+    }
+
+    /*
+    public void adicionaAlimento (Item item) {
+        this.alimentos.add(item);
+        item.getPedidos().add(this);
+    }
+    */
 }

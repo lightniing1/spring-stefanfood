@@ -2,7 +2,7 @@ package com.stefanini.stefanfood.dto;
 
 import java.math.BigDecimal;
 
-public class AlimentoDto {
+public class ItemDto {
 
     private String nome;
     private BigDecimal preco;

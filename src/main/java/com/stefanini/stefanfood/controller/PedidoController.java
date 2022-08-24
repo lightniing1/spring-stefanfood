@@ -17,11 +17,11 @@ public class PedidoController {
     @Autowired
     PedidoService pedidoService;
 
-    @PostMapping
+   /* @PostMapping
     public ResponseEntity<PedidoDto> novoPedido (@RequestBody PedidoMapper novoPedido) {
         return pedidoService.montaPedido(novoPedido);
     }
-
+*/
     @GetMapping
     public ResponseEntity<List<Pedido>> listaPedidos() {
         return pedidoService.listaPedidos();

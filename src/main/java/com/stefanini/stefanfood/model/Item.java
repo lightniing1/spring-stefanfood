@@ -11,8 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "alimento")
-public class Alimento {
+@Table(name = "item")
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -25,12 +25,12 @@ public class Alimento {
     private BigDecimal preco;
     @Column(length = 150)
     private String descricao;
-    @ManyToMany(mappedBy = "alimentos")
+    @OneToMany(mappedBy = "item")
     @JsonIgnore
-    private Set<Pedido> pedidos = new HashSet<>();
+    private Set<PedidosItens> pedidosItens = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "empresa_id")
-    @NotNull(message = "alimento deve pertencer a uma empresa")
+    @NotNull(message = "item deve pertencer a uma empresa")
     private Empresa empresa;
     private boolean excluido;
 
@@ -82,11 +82,11 @@ public class Alimento {
         this.descricao = descricao;
     }
 
-    public Set<Pedido> getPedidos() {
-        return pedidos;
+    public Set<PedidosItens> getPedidosItens() {
+        return pedidosItens;
     }
 
-    public void setPedidos(Set<Pedido> pedidos) {
-        this.pedidos = pedidos;
+    public void setPedidosItens(Set<PedidosItens> pedidosItens) {
+        this.pedidosItens = pedidosItens;
     }
 }
