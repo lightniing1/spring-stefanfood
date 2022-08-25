@@ -1,5 +1,8 @@
 package com.stefanini.stefanfood.mapper;
 
+import com.stefanini.stefanfood.model.Item;
+import com.stefanini.stefanfood.model.PedidosItens;
+
 import java.util.List;
 
 public class PedidoMapper {
@@ -7,7 +10,7 @@ public class PedidoMapper {
     private Long cliente;
     private Long empresa;
     private Long enderecoCliente;
-    private List<Long> alimentos;
+    private List<ItemMapper> itens;
 
     public PedidoMapper() {
 
@@ -37,11 +40,11 @@ public class PedidoMapper {
         this.enderecoCliente = enderecoCliente;
     }
 
-    public List<Long> getAlimentos() {
-        return alimentos;
+    public List<ItemMapper> getItens() {
+        return itens;
     }
 
-    public void setAlimentos(List<Long> alimentos) {
-        this.alimentos = alimentos;
+    public void setItens(List<ItemMapper> itens) {
+        this.itens = itens;
     }
 }

@@ -1,5 +1,7 @@
 package com.stefanini.stefanfood.dto;
 
+import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.Set;
 
 public class PedidoDto {
@@ -8,6 +10,15 @@ public class PedidoDto {
     private String empresa;
     private EnderecoClienteDto enderecoCliente;
     private Set<ItemDto> alimentos;
+    private BigDecimal total;
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
 
     public PedidoDto() {
 

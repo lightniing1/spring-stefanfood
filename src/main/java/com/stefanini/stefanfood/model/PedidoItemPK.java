@@ -30,6 +30,7 @@ public class PedidoItemPK implements Serializable {
         this.itemId = itemId;
     }
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,4 +43,5 @@ public class PedidoItemPK implements Serializable {
     public int hashCode() {
         return Objects.hash(pedidoId, itemId);
     }
+     */
 }

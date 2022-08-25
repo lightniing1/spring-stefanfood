@@ -7,6 +7,15 @@ public class ItemDto {
     private String nome;
     private BigDecimal preco;
     private String descricao;
+    private Integer quantidade;
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public String getNome() {
         return nome;

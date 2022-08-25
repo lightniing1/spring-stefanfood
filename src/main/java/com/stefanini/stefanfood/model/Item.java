@@ -25,9 +25,9 @@ public class Item {
     private BigDecimal preco;
     @Column(length = 150)
     private String descricao;
-    @OneToMany(mappedBy = "item")
-    @JsonIgnore
-    private Set<PedidosItens> pedidosItens = new HashSet<>();
+    //@OneToMany(mappedBy = "item")
+    //@JsonIgnore
+    //private Set<PedidosItens> pedidosItens = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     @NotNull(message = "item deve pertencer a uma empresa")
@@ -82,11 +82,4 @@ public class Item {
         this.descricao = descricao;
     }
 
-    public Set<PedidosItens> getPedidosItens() {
-        return pedidosItens;
-    }
-
-    public void setPedidosItens(Set<PedidosItens> pedidosItens) {
-        this.pedidosItens = pedidosItens;
-    }
 }

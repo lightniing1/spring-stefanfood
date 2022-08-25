@@ -17,8 +17,8 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-    @OneToMany(mappedBy = "pedido")
-    private Set<PedidosItens> item = new HashSet<>();
+    //@OneToMany(mappedBy = "pedido")
+    //private Set<PedidosItens> item = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "endereco_entrega_id")
     private EnderecoCliente enderecoEntrega;
@@ -65,15 +65,17 @@ public class Pedido {
         this.enderecoEntrega = enderecoEntrega;
     }
 
-    public Set<PedidosItens> getItem() {
+    /*public Set<PedidosItens> getItem() {
         return item;
     }
+
+
 
     public void setItem(Set<PedidosItens> item) {
         this.item = item;
     }
 
-    /*
+
     public void adicionaAlimento (Item item) {
         this.alimentos.add(item);
         item.getPedidos().add(this);
