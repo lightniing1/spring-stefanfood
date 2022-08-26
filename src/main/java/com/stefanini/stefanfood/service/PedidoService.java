@@ -78,7 +78,14 @@ public class PedidoService {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+    }
 
+    public ResponseEntity<List<PedidoDto>> listaPedidosDoCliente(Long clientePedido) {
+        Cliente cliente = clienteRepository.findById(clientePedido).get();
+        return new ResponseEntity<List<PedidoDto>>(pedidoRepository.findAll().stream()
+                .filter(x -> x.getCliente().equals(cliente))
+                .map(this::converteEntityParaDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     public PedidoDto converteEntityParaDto(Pedido pedido) {

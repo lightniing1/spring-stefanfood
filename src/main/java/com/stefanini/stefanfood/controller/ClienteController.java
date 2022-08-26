@@ -1,10 +1,12 @@
 package com.stefanini.stefanfood.controller;
 
 import com.stefanini.stefanfood.dto.ClienteDto;
+import com.stefanini.stefanfood.dto.PedidoDto;
 import com.stefanini.stefanfood.model.Cliente;
 import com.stefanini.stefanfood.model.EnderecoCliente;
 import com.stefanini.stefanfood.service.ClienteService;
 import com.stefanini.stefanfood.service.EnderecoClienteService;
+import com.stefanini.stefanfood.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ public class ClienteController {
 
     @Autowired
     ClienteService clienteService;
+    @Autowired
+    PedidoService pedidoService;
 
     @Autowired
     EnderecoClienteService enderecoClienteService;
@@ -24,6 +28,11 @@ public class ClienteController {
     @GetMapping
     public ResponseEntity<List<ClienteDto>> listarClientes() {
         return clienteService.listarClientes();
+    }
+
+    @GetMapping("/{id}/pedidos")
+    public ResponseEntity<List<PedidoDto>> listaPedidosDoCliente(@PathVariable Long id) {
+        return pedidoService.listaPedidosDoCliente(id);
     }
 
     @PostMapping
